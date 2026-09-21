@@ -1,32 +1,30 @@
-// #include <iostream>
-// #include <vector>
-// #include <algorithm>
-// using namespace std;
-// int main(){
-//     int n; cin >> n;
-//     vector<pair<int, char>> v(n);
-//     for (int i = 0; i < n; i++){
-//         cin >> v[i].second >> v[i].first;
-//     }
-//     sort(v.begin(), v.end());
-    
-//     vector<int> lying_left(n);
-//     for (int i =1; i<n; i++){
-//         lying_left[i] += lying_left[i-1];
-//         if (v[i-1].second == 'L'){
-//             lying_left[i]++;
-//         }
-//     }
-//     vector<int> lying_right(n);
-//     for (int i = n-2; i>=0; i--){
-//         lying_right[i] += lying_right[i+1];
-//         if (v[i+1].second == 'R'){
-//             lying_right[i]++;
-//         }
-//     }
-//     int minLiars = n;
-//     for (int i = 0; i < n; i++){
-//         minLiars = min(minLiars, lying_left[i] + lying_right[i]);
-//     }
-//     cout << minLiars << endl;
-// }
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    int n; cin >> n;
+    vector<pair<long long, char>> position(n);
+    for (int i = 0; i <n; i++){
+        cin >> position[i].second >> position[i].first;
+    }
+    sort(position.begin(), position.end());
+    int min_liars = 1001;
+    for (int i = 0; i < n; i++){
+        int leftLiars = 0;
+        for (int j = 0; j < i; j++){
+            if (position[j].second == 'L'){
+                leftLiars++;
+            }
+        }
+        int rightLiars = 0; 
+        for (int j = i+1; j < n; j++){
+            if (position[j].second == 'G'){
+                rightLiars++;
+            }
+        }
+        min_liars = min(min_liars, rightLiars+leftLiars);
+    }
+    cout << min_liars << "\n";
+
+}
