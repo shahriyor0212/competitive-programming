@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 void solve(long long n){
-    long long sum = 0;
+    long long sum = 1;
     for (int k = 2; k < 30; k++){
         sum += (1LL << (k-1));
         if (n % sum == 0){
